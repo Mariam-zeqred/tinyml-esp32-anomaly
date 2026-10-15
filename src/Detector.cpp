@@ -10,6 +10,10 @@
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/schema/schema_generated.h"
 
+#ifndef TFLITE_SCHEMA_VERSION
+#define TFLITE_SCHEMA_VERSION 3  // the library ships no version.h; the .tflite file says "TFL3"
+#endif
+
 namespace {
 tflite::MicroErrorReporter g_error_reporter;
 tflite::MicroMutableOpResolver<2> g_resolver;  // the model is 4x FULLY_CONNECTED + 3x TANH
