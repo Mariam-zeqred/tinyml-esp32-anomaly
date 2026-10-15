@@ -104,13 +104,13 @@ a false alarm. The ranges are now calibrated on all clean windows; weights are u
 
 ```
   reference_kernel_matches_interpreter_on_recorded_windows
-    245 windows, 145 flagged, worst |ref - interpreter| = 53 % of tolerance
+note: 245 windows, 145 flagged, worst |ref - interpreter| = 53 % of tolerance
   clean_segments_stay_quiet_and_faults_fire
-    clean_cooldown_val        33 windows,  0 flagged
-    clean_steady_38_8_val     33 windows,  0 flagged
-    spike                     33 windows, 24 flagged
-    heater_stuck_on           65 windows, 45 flagged
-    door_open                 81 windows, 76 flagged
+note: clean_cooldown_val        33 windows,  0 flagged
+note: clean_steady_38_8_val     33 windows,  0 flagged
+note: spike                     33 windows, 24 flagged
+note: heater_stuck_on           65 windows, 45 flagged
+note: door_open                 81 windows, 76 flagged
 307 checks passed, 0 failed
 ```
 
