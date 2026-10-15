@@ -1,0 +1,27 @@
+# secrets (the sketch needs none, keep the pattern)
+include/secrets.h
+.env
+.env.*
+
+# build output
+.pio/
+build/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.log
+
+# TensorFlow / Keras scratch
+*.h5
+checkpoints/
+logs/
+
+# large data (anything over 10 MB must not be committed)
+data/*.csv.gz
+data/*.parquet
+
+# editors
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,115 @@
+{
+  "model": "anomaly_ae_int8.tflite",
+  "tflite_bytes": 6560,
+  "threshold": {
+    "value": 0.0018830174286003111,
+    "rule": "quantile 0.995 of int8 scores on clean validation windows",
+    "val_windows": 461
+  },
+  "clean_day": {
+    "windows": 1336,
+    "flagged_windows_all": 3,
+    "flagged_windows_val": 3,
+    "false_alarm_episodes_all": [
+      {
+        "minute": 117.3,
+        "windows": 1
+      },
+      {
+        "minute": 119.3,
+        "windows": 1
+      },
+      {
+        "minute": 241.1,
+        "windows": 1
+      }
+    ],
+    "hours": 5.71,
+    "score_median": 0.0001135166877884845,
+    "score_max": 0.002237635920695177
+  },
+  "float_vs_int8_clean_day": {
+    "windows": 1336,
+    "decision_flips": 4,
+    "abs_diff_p50": 2.871151247020569e-05,
+    "abs_diff_max": 0.0012281770150919984
+  },
+  "faults": {
+    "trials_per_kind": 20,
+    "seed": 0,
+    "defaults_readings_magnitude": {
+      "stuck_sensor": [
+        60,
+        0.0
+      ],
+      "spike": [
+        1,
+        1.5
+      ],
+      "heater_stuck_on": [
+        40,
+        0.0
+      ],
+      "heater_stuck_off": [
+        80,
+        0.0
+      ],
+      "door_open": [
+        60,
+        4.0
+      ]
+    },
+    "thermal_model": {
+      "a": 0.5908,
+      "tau_h": 4.9175,
+      "b": 0.0111
+    },
+    "per_kind": {
+      "stuck_sensor": {
+        "trials": 20,
+        "detection_rate": 0.45,
+        "null_detection_rate": 0.1,
+        "median_delay_min": 11.0,
+        "median_peak_score_ratio": 0.7308246891877254,
+        "fp_episodes_before_fault_per_trial": 1.65,
+        "episodes_after_settle_per_trial": 1.65
+      },
+      "spike": {
+        "trials": 20,
+        "detection_rate": 1.0,
+        "null_detection_rate": 0.0,
+        "median_delay_min": 0.0,
+        "median_peak_score_ratio": 11.985853307587028,
+        "fp_episodes_before_fault_per_trial": 1.7,
+        "episodes_after_settle_per_trial": 2.25
+      },
+      "heater_stuck_on": {
+        "trials": 20,
+        "detection_rate": 0.95,
+        "null_detection_rate": 0.1,
+        "median_delay_min": 4.25,
+        "median_peak_score_ratio": 33.666806049761675,
+        "fp_episodes_before_fault_per_trial": 1.65,
+        "episodes_after_settle_per_trial": 3.85
+      },
+      "heater_stuck_off": {
+        "trials": 20,
+        "detection_rate": 0.7,
+        "null_detection_rate": 0.1,
+        "median_delay_min": 9.25,
+        "median_peak_score_ratio": 6.157119415572291,
+        "fp_episodes_before_fault_per_trial": 1.65,
+        "episodes_after_settle_per_trial": 1.85
+      },
+      "door_open": {
+        "trials": 20,
+        "detection_rate": 1.0,
+        "null_detection_rate": 0.1,
+        "median_delay_min": 1.75,
+        "median_peak_score_ratio": 73.27628605794396,
+        "fp_episodes_before_fault_per_trial": 1.65,
+        "episodes_after_settle_per_trial": 1.45
+      }
+    }
+  }
+}

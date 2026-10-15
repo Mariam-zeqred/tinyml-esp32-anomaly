@@ -1,0 +1,39 @@
+{
+  "data": "data/hive-1C5A00_history_2026-10-03.json (1 device, 1 day)",
+  "windows": {
+    "train": 534,
+    "val": 461,
+    "dropped": 341
+  },
+  "architecture": [
+    63,
+    16,
+    4,
+    16,
+    31
+  ],
+  "parameters": 1699,
+  "epochs": 400,
+  "train_seconds": 50.3,
+  "loss_final": {
+    "train": 0.00010496036702534184,
+    "val": 0.0001384684583172202
+  },
+  "score_float": {
+    "train_median": 8.298282178857656e-05,
+    "val_median": 8.112722484660757e-05,
+    "val_p99": 0.0016351436888915767,
+    "val_max": 0.002151398848048039
+  },
+  "score_int8": {
+    "train_median": 0.00011930871170526016,
+    "val_median": 0.00011118484842438367,
+    "val_p99": 0.0016917011703634485,
+    "val_max": 0.002237635920695177,
+    "abs_diff_vs_float_val_p50": 2.7417462384500153e-05,
+    "abs_diff_vs_float_val_p99": 0.0003622801083371386,
+    "abs_diff_vs_float_val_max": 0.0012281770150919984
+  },
+  "tflite_bytes": 6560,
+  "tensorflow": "2.21.0"
+}

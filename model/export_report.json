@@ -1,0 +1,20 @@
+{
+  "tflite_bytes": 6560,
+  "n_params": 1699,
+  "ref_vs_int8_abs_diff_max_clean_day": 0.0011320605557587436,
+  "ref_vs_int8_rel_diff_max_fault_segments": 0.2553103697033626,
+  "score_tolerance": {
+    "abs": 0.0016980908336381153,
+    "rel": 0.38296555455504394
+  },
+  "test_windows": 245,
+  "written": [
+    "RefModel.h",
+    "Window.h",
+    "model_data.cc",
+    "model_data.h",
+    "model_params.h",
+    "model_weights.h",
+    "test_vectors.h"
+  ]
+}
