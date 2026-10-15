@@ -42,9 +42,9 @@ everything on it.
 **"Why does int8 quantisation matter for such a small model?"**
 Because it changed a verdict. Calibrating the int8 ranges on training windows only left the
 output unable to represent the fastest cool-down of the day, which lay in a validation block.
-The clipped reconstruction scored 0.003 against a float score of 0.00014. The fix was to
-calibrate on all clean windows; the lesson is that the representative dataset must cover the
-range the model will see, not just the training set.
+The clipped reconstruction scored 0.003 against 0.00014 in float (numbers from that discarded
+export). The fix was to calibrate on all clean windows; the lesson is that the representative
+dataset must cover the range the model will see, not just the training set.
 
 **"How do you know the board runs the same model?"**
 `tests/test_artifacts.py` checks that `model_data.cc` is byte-identical to the

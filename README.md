@@ -78,27 +78,31 @@ physical ones are synthesised with its fitted second-order thermal model, `a` = 
 
 "Detected" means at least one flagged window ends between 1 min before and 5 min after the
 fault; "chance floor" is the same test on the clean trace (the day's own three false alarms
-landing in that interval). False alarms *before* a fault average 1.65 episodes per trial, which
-is exactly the clean day's three single windows: injecting a fault adds none. Windows flagged
-*after* the 5-minute settle margin (1.5 to 3.9 episodes per trial) are mostly the chamber still
-recovering: with a 90-minute time constant a 10-minute heater fault leaves the chamber 5 °C hot,
+landing in that interval). False alarms *before* a fault average 1.65 episodes per trial (1.7
+for the spike), which is exactly the clean day's three single windows: injecting a fault adds
+none. Windows flagged *after* the 5-minute settle margin (1.5 to 3.9 episodes per trial) are
+mostly the chamber still recovering: with a 90-minute time constant a 10-minute heater fault
+leaves the chamber up to 5 °C hot (median 4 °C over the 20 trials, a thermal-model estimate),
 and the hour of faster-than-normal cooling that follows looks abnormal too (figure 02).
 
 The stuck sensor is the honest failure: a flat temperature with the heater off looks like the
 real steady state, and its median peak score stays under the threshold. Repo #1's model-drift
-detector had the same difficulty (0.6 detection rate). The heater-stuck-off case is slow
-because cooling at 0.2 °C/min is only a little faster than the normal post-pulse decay.
+detector had the same difficulty (0.6 detection rate). The heater-stuck-off case is slow because
+the extra cooling the thermal model adds is a median 0.07 °C/min (0.25 °C/min at most over the
+20 trials, an estimate from `faults.py`), little more than the normal post-pulse decay.
 
 ![clean day](figures/01_clean_day_scores.png)
 ![fault examples](figures/02_fault_examples.png)
 
-**Float vs int8.** On validation windows the int8 model's score differs from the float
-model's by a median 0.00003 (max 0.0012). On the clean day four of 1 336 verdicts flip: three
-sit within 11 % of the threshold on both sides, the fourth (minute 241) scores 0.54× the
-threshold in float and 1.19× in int8 and is one of the day's three false alarms. The first export calibrated the int8 ranges on training windows
-only, and the output could then not represent the one fast cool-down of the day (after the
-first overshoot, in a validation block): clipping turned a float score of 0.00014 into 0.0030,
-a false alarm. The ranges are now calibrated on all clean windows; weights are unchanged.
+**Float vs int8.** On validation windows the int8 model's score differs from the float model's
+by a median 0.00003 (max 0.0012). On the clean day four of 1 336 verdicts flip: three sit within
+12 % of the threshold on both sides, the fourth (minute 241) scores 0.54× the threshold in float
+and 1.19× in int8 and is one of the day's three false alarms. The first export calibrated the
+int8 ranges on training windows only, and the output could then not represent the one fast
+cool-down of the day (after the first overshoot, in a validation block): clipping turned a float
+score of 0.00014 into 0.0030, a false alarm (those two scores are from that discarded export and
+cannot be reproduced from the committed files). The ranges are now calibrated on all clean
+windows; weights are unchanged.
 
 **Host test** (`make check`), the part a reviewer can run without a board:
 
@@ -141,7 +145,7 @@ above are what to read off the serial monitor first.
 - The model needs the heater state, so it belongs inside the controller firmware, not on a
   separate listener.
 - Reading dropouts are not scored (a sampling watchdog is the right tool); the window is
-  index-based and ignores the two 30–74 s gaps in the day.
+  index-based and ignores the day's one 74 s gap (and one 22 s interval).
 
 ## Next steps
 
