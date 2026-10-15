@@ -126,7 +126,7 @@ tanh layers matters more). The sketch's boot self-check applies the same test on
 | model file | 6 560 bytes (1 699 int8 weights, 4 FULLY_CONNECTED + 3 TANH) | measured, `model/export_report.json` |
 | activations | 166 bytes of int8 tensors; `TENSOR_ARENA_BYTES` set to 8 192 incl. TFLM bookkeeping | tensor shapes; the sketch prints `arena used` |
 | inference | 1 632 multiply-accumulates: well under 1 ms at 240 MHz | **estimate**, the sketch prints the measured µs |
-| firmware size | see the `firmware-build` CI job | not flashed in this repo |
+| firmware (sketch + TFLM + Arduino core) | 334 009 bytes flash (25.5 % of 1.3 MB), 30 184 bytes static RAM | `pio run -e esp32dev` in CI |
 
 The firmware was compiled by CI, not flashed or timed on a board: the arena and timing lines
 above are what to read off the serial monitor first.
