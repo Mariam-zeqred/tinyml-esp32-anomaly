@@ -101,7 +101,7 @@ static void reference_kernel_matches_interpreter_on_recorded_windows() {
       const float tol = fmaxf(AN_SCORE_TOL_ABS, AN_SCORE_TOL_REL * seg.score[wi]);
       worst = fmaxf(worst, diff / tol);
       if (diff > tol) {
-        printf("    %s window %d: ref %.6f interpreter %.6f\n", seg.name, wi, score, seg.score[wi]);
+        printf("FAIL %s window %d: ref %.6f interpreter %.6f\n", seg.name, wi, score, seg.score[wi]);
         CHECK(diff <= tol);
       }
       if (seg.sure[wi]) CHECK_EQ((score > AN_THRESHOLD) ? 1 : 0, (int)seg.flag[wi]);
@@ -111,7 +111,7 @@ static void reference_kernel_matches_interpreter_on_recorded_windows() {
     }
     CHECK_EQ(wi, seg.n - AN_WINDOW + 1);
   }
-  printf("    %d windows, %d flagged, worst |ref - interpreter| = %.0f %% of tolerance\n", windows,
+  printf("note: %d windows, %d flagged, worst |ref - interpreter| = %.0f %% of tolerance\n", windows,
          flagged, (double)(100.0f * worst));
   CHECK(windows > 200);
 }
@@ -129,7 +129,7 @@ static void clean_segments_stay_quiet_and_faults_fire() {
       flagged += an_score(f, recon) > AN_THRESHOLD;
     }
     const bool is_clean = seg.name[0] == 'c';
-    printf("    %-24s %3d windows, %2d flagged\n", seg.name, seg.n - AN_WINDOW + 1, flagged);
+    printf("note: %-24s %3d windows, %2d flagged\n", seg.name, seg.n - AN_WINDOW + 1, flagged);
     if (is_clean) CHECK_EQ(flagged, 0);
     else CHECK(flagged >= 3);
   }
